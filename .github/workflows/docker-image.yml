@@ -14,11 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image Nodejs 14
-      run: docker-compose build
-      env:
-        NODEJS_VERSION: 14
-    
     - name: Build the Docker image Nodejs 16
       run: docker-compose build
       env:
