@@ -6,15 +6,16 @@
 
 ## Install
   ### Using DECK
-    Install ionic from the DECK marketplace and follow the instructions on the GUI
+ Install ionic from the DECK marketplace and follow the instructions on the GUI
+ 
   ### From terminal with Docker
-    The quickest way to get started with the Nodejs Development Container is using docker-compose.
-    Download the ```docker-compose.yml``` file in the application directory:
-      ```
-      $ git clone https://github.com/deck-app/IONIC.git
-      $ cd IONIC
-      $ edit .env file as per your requirement
-      $ docker-compose up -d
-      ```
+  The quickest way to get started with the Nodejs Development Container is using docker-compose.
+  Download the ```docker-compose.yml``` file in the application directory:
+  ```
+  $ git clone https://github.com/deck-app/IONIC.git
+  $ cd IONIC
+  $ edit .env file as per your requirement
+  $ docker-compose up -d
+  ```
 ## Modifying project settings
   From the DECK app, go to stack list and click on project's More > configure > Advanced configuration Follow the instructions below and restart your stack from the GUI
