@@ -8,7 +8,6 @@ user:
     type:
       select
     values:
-      - "14"
       - "16"
       - "17"
       - "18"
