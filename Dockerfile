@@ -22,17 +22,17 @@ RUN ionic --no-interactive config set -g daemon.updates false
 #     && rm -f android-sdk-tools.zip \
 #     && echo y | android update sdk --no-ui -a --filter \
 #        tools,platform-tools,${ANDROID_EXTRAS},${API_LEVELS},${BUILD_TOOLS_VERSIONS} --no-https
-ARG ANDROID_SDK_VERSION="3859397"
-ARG ANDROID_HOME="/opt/android-sdk"
-ARG ANDROID_BUILD_TOOLS_VERSION="26.0.2"
-ENV ANDROID_HOME "${ANDROID_HOME}"
-RUN curl -fSLk https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
-    && unzip sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
-    && mkdir /opt/android-sdk \
-    && mv tools /opt/android-sdk \
-    && (while sleep 3; do echo "y"; done) | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
-    && $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" \
-    && $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"
+# ARG ANDROID_SDK_VERSION="3859397"
+# ARG ANDROID_HOME="/opt/android-sdk"
+# ARG ANDROID_BUILD_TOOLS_VERSION="26.0.2"
+# ENV ANDROID_HOME "${ANDROID_HOME}"
+# RUN curl -fSLk https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
+#     && unzip sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
+#     && mkdir /opt/android-sdk \
+#     && mv tools /opt/android-sdk \
+#     && (while sleep 3; do echo "y"; done) | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
+#     && $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" \
+#     && $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"
 
 # COPY distribution/ /distribution/
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
