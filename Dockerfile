@@ -3,7 +3,7 @@ FROM node:${NODEJS_VERSION}-alpine as base
 LABEL maintainer Naba Das <hello@get-deck.com>
 
 WORKDIR /src
-RUN apk add nano bash tar openjdk11 unzip libstdc++
+RUN apk add nano bash tar openjdk11 unzip libstdc++ curl
 
 EXPOSE 3000
 RUN npm i -g ionic cordova @ionic/cli
@@ -22,6 +22,17 @@ RUN ionic --no-interactive config set -g daemon.updates false
 #     && rm -f android-sdk-tools.zip \
 #     && echo y | android update sdk --no-ui -a --filter \
 #        tools,platform-tools,${ANDROID_EXTRAS},${API_LEVELS},${BUILD_TOOLS_VERSIONS} --no-https
+ARG ANDROID_SDK_VERSION="3859397"
+ARG ANDROID_HOME="/opt/android-sdk"
+ARG ANDROID_BUILD_TOOLS_VERSION="26.0.2"
+ENV ANDROID_HOME "${ANDROID_HOME}"
+RUN curl -fSLk https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
+    && unzip sdk-tools-linux-${ANDROID_SDK_VERSION}.zip \
+    && mkdir /opt/android-sdk \
+    && mv tools /opt/android-sdk \
+    && (while sleep 3; do echo "y"; done) | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
+    && $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" \
+    && $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"
 
 # COPY distribution/ /distribution/
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
